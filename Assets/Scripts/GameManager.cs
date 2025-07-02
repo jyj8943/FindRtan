@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     
     public Text timeText;
     public GameObject endText;
+
+    private AudioSource audioSource;
+    public AudioClip clip;
     
     private float time = 0f;
     public int cardCount = 0;
@@ -28,6 +31,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1.0f;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -47,6 +52,8 @@ public class GameManager : MonoBehaviour
         if (firstCard.idx == secondCard.idx)
         {
             // 파괴
+            audioSource.PlayOneShot(clip);
+            
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             

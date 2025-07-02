@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,17 @@ public class Card : MonoBehaviour
     public GameObject front;
     public GameObject back;
 
+    private AudioSource audioSource;
+    public AudioClip clip;
+
     public Animator anim;
 
     public SpriteRenderer frontImage;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void Setting(int number)
     {
@@ -21,6 +30,10 @@ public class Card : MonoBehaviour
 
     public void OpenCard()
     {
+        if (GameManager.instance.secondCard != null) return;
+        
+        audioSource.PlayOneShot(clip);
+        
         anim.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
