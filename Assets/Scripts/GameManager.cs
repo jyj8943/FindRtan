@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
     public Card secondCard;
     
     public Text timeText;
+    public GameObject endText;
     
     private float time = 0f;
+    public int cardCount = 0;
 
     private void Awake()
     {
@@ -21,6 +23,11 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+    }
+
+    private void Start()
+    {
+        Time.timeScale = 1.0f;
     }
 
     private void Update()
@@ -36,6 +43,13 @@ public class GameManager : MonoBehaviour
             // 파괴
             firstCard.DestroyCard();
             secondCard.DestroyCard();
+            
+            cardCount -= 2;
+            if (cardCount == 0)
+            {
+                Time.timeScale = 0f;
+                endText.SetActive(true);
+            }
         }
         else
         {
