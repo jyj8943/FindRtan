@@ -6,6 +6,11 @@ public class Card : MonoBehaviour
 {
     private int idx = 0;
 
+    public GameObject front;
+    public GameObject back;
+
+    public Animator anim;
+
     public SpriteRenderer frontImage;
     
     void Start()
@@ -22,5 +27,12 @@ public class Card : MonoBehaviour
     {
         idx = number;
         frontImage.sprite = Resources.Load<Sprite>($"rtan{idx}");
+    }
+
+    public void OpenCard()
+    {
+        anim.SetBool("isOpen", true);
+        front.SetActive(true);
+        back.SetActive(false);
     }
 }
