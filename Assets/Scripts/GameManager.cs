@@ -34,6 +34,12 @@ public class GameManager : MonoBehaviour
     {
         time += Time.deltaTime;
         timeText.text = time.ToString("N2");
+
+        if (time > 30f)
+        {
+            endText.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
 
     public void Matched()
